@@ -1,0 +1,10 @@
+mpv/
+pulse/
+/pi-web/
+cagent/
+git/
+gh/
+wireshark/
+freerdp/
+result
+.claude/settings.local.json
