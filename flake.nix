@@ -60,6 +60,8 @@
 
           CustomUserPreferences.NSGlobalDomain."com.apple.mouse.scaling" = 0.6875;
 
+          CustomUserPreferences.NSGlobalDomain.CGDisableCursorLocationMagnification = true;
+
           NSGlobalDomain."com.apple.swipescrolldirection" = false;
 
           trackpad.Clicking = true;
