@@ -23,6 +23,15 @@
             pkgs.mpv
             pkgs.git
             pkgs.gh
+            pkgs.neovim
+            pkgs.nixpkgs-fmt
+            pkgs.shfmt
+            (pkgs.texliveBasic.withPackages (ps: with ps; [
+              preprint
+              titlesec
+              enumitem
+              hyperref
+            ]))
           ];
 
         homebrew = {
@@ -40,6 +49,11 @@
         };
 
         nix.settings.experimental-features = "nix-command flakes";
+
+        environment.variables = {
+          EDITOR = "nvim";
+          VISUAL = "nvim";
+        };
 
         system.configurationRevision = self.rev or self.dirtyRev or null;
 
@@ -175,90 +189,13 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            home-manager.users."user" = { pkgs, ... }: {
+            home-manager.users."user" = { ... }: {
+              imports = [
+                ./home/zsh.nix
+                ./home/starship.nix
+              ];
+
               home.stateVersion = "26.05";
-
-              programs.ghostty = {
-                package = null;
-                enable = true;
-                settings = {
-                  font-size = 22;
-                  clipboard-paste-protection = false;
-                };
-              };
-
-              programs.zsh = {
-                enable = true;
-                enableCompletion = true;
-                autosuggestion.enable = true;
-                syntaxHighlighting.enable = true;
-                sessionVariables = {
-                  PI_ROTATOR_TELEMETRY = "off";
-                };
-              };
-
-              programs.starship = {
-                enable = true;
-              };
-
-              programs.neovim = {
-                enable = true;
-                defaultEditor = true;
-                viAlias = true;
-                vimAlias = true;
-
-                extraPackages = [
-                  pkgs.nixpkgs-fmt
-                  pkgs.shfmt
-                ];
-
-                plugins = [
-                  pkgs.vimPlugins.conform-nvim
-                ];
-
-                initLua = ''
-                  vim.opt.number = true
-                  vim.opt.shiftwidth = 2
-                  vim.opt.tabstop = 2
-                  vim.opt.expandtab = true
-                  vim.opt.relativenumber = true
-
-                  vim.opt.clipboard = "unnamedplus"
-
-                  vim.keymap.set("v", ">", ">gv")
-                  vim.keymap.set("v", "<", "<gv")
-
-                  vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-                  vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-
-                  vim.api.nvim_create_autocmd("BufReadPost", {
-                    pattern = "*",
-                    callback = function()
-                      local mark = vim.api.nvim_buf_get_mark(0, '"')
-                      local lcount = vim.api.nvim_buf_line_count(0)
-                      if mark[1] > 0 and mark[1] <= lcount then
-                        pcall(vim.api.nvim_win_set_cursor, 0, mark)
-                      end
-                    end,
-                  })
-                  
-                  vim.api.nvim_create_autocmd("BufWritePre", {
-                    pattern = { "*.nix", "*.sh", "*.zsh" },
-                    callback = function()
-                      local ft = vim.bo.filetype
-                      local view = vim.fn.winsaveview()
-                      
-                      if ft == "nix" then
-                        vim.cmd("%!nixpkgs-fmt")
-                      elseif ft == "sh" or ft == "zsh" then
-                        vim.cmd("%!shfmt -i 2")
-                      end
-                      
-                      vim.fn.winrestview(view)
-                    end,
-                  })
-                '';
-              };
             };
           }
         ];
