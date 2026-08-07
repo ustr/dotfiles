@@ -12,6 +12,7 @@
     pkgs.prismlauncher
     pkgs.qbittorrent
     pkgs.shfmt
+    pkgs.tex-fmt
     pkgs.vesktop
 
     (pkgs.texliveBasic.withPackages (ps: with ps; [
