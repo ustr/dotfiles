@@ -34,7 +34,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     elseif ft == "sh" or ft == "zsh" then
       vim.cmd("%!shfmt -i 2")
     elseif ft == "tex" then
-      vim.cmd("%!tex-fmt --stdin")
+      vim.cmd("%!tex-fmt --stdin 2>/dev/null")
     end
 
     vim.fn.winrestview(view)
