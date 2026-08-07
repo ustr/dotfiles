@@ -1,1 +1,9 @@
-/nix/store/wbny9nq6yxyi4y3dhsh49ad6q7m65cyd-home-manager-files/.config/git/config
+[init]
+	defaultBranch = main
+
+[push]
+	autoSetupRemote = true
+
+[user]
+	email = 139663719+ibrah-m@users.noreply.github.com
+	name = ibrah-m
