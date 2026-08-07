@@ -1,1 +1,2 @@
-/nix/store/gxc1irsbdrw9y71jv9hi6fiipc3p6ayz-home-manager-files/.config/ghostty/config
+clipboard-paste-protection = false
+font-size = 22
