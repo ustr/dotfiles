@@ -10,6 +10,7 @@
 
     casks = [
       "ungoogled-chromium"
+      "chatgpt"
     ];
 
     onActivation.cleanup = "zap";
