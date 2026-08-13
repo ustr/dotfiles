@@ -33,7 +33,6 @@
     dock.persistent-apps = [
       "${pkgs.ghostty-bin}/Applications/Ghostty.app"
       "/Applications/Chromium.app"
-      "${pkgs.vesktop}/Applications/Vesktop.app"
       "${pkgs.keepassxc}/Applications/KeepassXC.app"
     ];
     dock.persistent-others = [ ];
