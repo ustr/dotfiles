@@ -14,6 +14,7 @@
     pkgs.shfmt
     pkgs.tex-fmt
     pkgs.vesktop
+    pkgs.ffmpeg
 
     (pkgs.texliveBasic.withPackages (ps: with ps; [
       enumitem

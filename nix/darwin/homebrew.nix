@@ -6,6 +6,7 @@
 
     brews = [
       "pi-coding-agent"
+      "llama.cpp"
     ];
 
     casks = [
