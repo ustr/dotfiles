@@ -59,6 +59,7 @@
     trackpad.Clicking = true;
     trackpad.FirstClickThreshold = 0;
     trackpad.ForceSuppressed = true;
+    trackpad.TrackpadTwoFingerFromRightEdgeSwipeGesture = 0;
 
     universalaccess.reduceMotion = true;
     universalaccess.reduceTransparency = true;
