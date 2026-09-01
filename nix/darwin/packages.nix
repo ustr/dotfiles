@@ -9,13 +9,13 @@
     pkgs.mpv
     pkgs.neovim
     pkgs.nixpkgs-fmt
-    pkgs.prismlauncher
     pkgs.qbittorrent
     pkgs.shfmt
     pkgs.tex-fmt
     pkgs.vesktop
     pkgs.ffmpeg
     pkgs.signal-desktop
+    pkgs.openai-whisper
 
     (pkgs.texliveBasic.withPackages (ps: with ps; [
       enumitem
