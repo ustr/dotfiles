@@ -8,6 +8,7 @@ vim.opt.clipboard = "unnamedplus"
 
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("n", "q:", "<Nop>")
 
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
