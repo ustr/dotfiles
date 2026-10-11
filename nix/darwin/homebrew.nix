@@ -5,8 +5,6 @@
     enable = true;
 
     brews = [
-      "pi-coding-agent"
-      "llama.cpp"
     ];
 
     casks = [

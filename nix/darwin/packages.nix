@@ -5,18 +5,18 @@
     pkgs.gh
     pkgs.git
     pkgs.ghostty-bin
-    pkgs.wireshark
-    pkgs.uv
-    pkgs.prismlauncher
     pkgs.keepassxc
-    pkgs.mpv
     pkgs.neovim
+    pkgs.vesktop
+    pkgs.uv
+    pkgs.pi-coding-agent
+    pkgs.ffmpeg
+    pkgs.yt-dlp
+    pkgs.scrcpy
+    pkgs.android-tools
     pkgs.nixpkgs-fmt
     pkgs.shfmt
     pkgs.tex-fmt
-    pkgs.vesktop
-    pkgs.ffmpeg
-    pkgs.signal-desktop
 
     (pkgs.texliveBasic.withPackages (ps: with ps; [
       enumitem
