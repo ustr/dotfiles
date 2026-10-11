@@ -2,15 +2,17 @@
 
 {
   imports = [
-    ./pi.nix
     ./zsh.nix
   ];
 
   programs.starship.enable = true;
 
-  home.sessionPath = [
-    "$HOME/.pi/agent/bin"
-  ];
+  home.file.".pi/agent/settings.json".text = builtins.toJSON {
+    defaultProvider = "openai-codex";
+    defaultModel = "gpt-6.1-sol";
+    defaultThinkingLevel = "medium";
+    packages = [ "npm:pi-web-access@0.38.0" ];
+  };
 
   home.stateVersion = "26.05";
 }

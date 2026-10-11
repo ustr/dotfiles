@@ -9,7 +9,7 @@
 
     shellAliases = {
       vim = "nvim";
-      gc = "git commit --allow-empty-message -m ''";
+      gc = "git commit -a --allow-empty-message -m '' && git push";
     };
 
     initContent = ''
