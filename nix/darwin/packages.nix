@@ -7,6 +7,7 @@
     pkgs.ghostty-bin
     pkgs.keepassxc
     pkgs.neovim
+    pkgs.tmux
     pkgs.vesktop
     pkgs.uv
     pkgs.pi-coding-agent
