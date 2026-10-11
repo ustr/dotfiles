@@ -12,6 +12,9 @@
     VISUAL = "nvim";
   };
 
+  programs.zsh.enableCompletion = false;
+  programs.zsh.enableBashCompletion = false;
+
   nix.settings.experimental-features = "nix-command flakes";
   nix.gc = {
     automatic = true;

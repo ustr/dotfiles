@@ -5,8 +5,6 @@
     ./zsh.nix
   ];
 
-  programs.starship.enable = true;
-
   home.file.".pi/agent/settings.json".text = builtins.toJSON {
     defaultProvider = "openai-codex";
     defaultModel = "gpt-6.1-sol";
