@@ -1,24 +1,30 @@
 { pkgs, ... }:
 
 {
-  environment.systemPackages = [
-    pkgs.gh
-    pkgs.git
-    pkgs.ghostty-bin
-    pkgs.keepassxc
-    pkgs.neovim
-    pkgs.vesktop
-    pkgs.uv
-    pkgs.pi-coding-agent
-    pkgs.ffmpeg
-    pkgs.yt-dlp
-    pkgs.scrcpy
-    pkgs.android-tools
-    pkgs.nixpkgs-fmt
-    pkgs.shfmt
-    pkgs.tex-fmt
+  environment.systemPackages = with pkgs; [
+    gh
+    git
 
-    (pkgs.texliveBasic.withPackages (ps: with ps; [
+    ghostty-bin
+    keepassxc
+    vesktop
+    signal-desktop
+    ollama
+
+    uv
+    pi-coding-agent
+    neovim
+    ffmpeg
+    yt-dlp
+
+    scrcpy
+    android-tools
+
+    nixpkgs-fmt
+    shfmt
+    tex-fmt
+
+    (texliveBasic.withPackages (ps: with ps; [
       enumitem
       hyperref
       preprint
