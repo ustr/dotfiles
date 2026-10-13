@@ -3,8 +3,8 @@ let
   piSrc = prev.fetchFromGitHub {
     owner = "earendil-works";
     repo = "pi";
-    tag = "v1.1.0";
-    hash = "sha256-lwjspkMGrW+8Fl/yBEDEFsHZJA57OKOhmVQmi6zfej4=";
+    tag = "v1.2.0";
+    hash = "sha256-IjNJvVxjzRur2foQDWPA5iM9sa3ThBoZU1/LT5pU6jc=";
   };
 in
 {
