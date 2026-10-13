@@ -5,17 +5,6 @@
     ./zsh.nix
   ];
 
-  programs.tmux = {
-    enable = true;
-    baseIndex = 1;
-    shortcut = "a";
-    extraConfig = ''
-      set -g extended-keys on
-      setw -g pane-base-index 1
-      set -g renumber-windows on
-    '';
-  };
-
   home.file.".pi/agent/settings.json" = {
     force = true;
     text = builtins.toJSON {
