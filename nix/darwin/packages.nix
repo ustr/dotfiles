@@ -8,9 +8,9 @@
 
     ghostty-bin
     keepassxc
-    vesktop
     signal-desktop
     ollama
+    mpv
 
     uv
     pi-coding-agent
