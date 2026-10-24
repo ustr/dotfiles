@@ -5,16 +5,6 @@
     ./zsh.nix
   ];
 
-  home.file.".pi/agent/settings.json" = {
-    force = true;
-    text = builtins.toJSON {
-      defaultProvider = "ollama";
-      defaultModel = "qwen3.5:9b";
-      defaultThinkingLevel = "medium";
-      packages = [ "npm:pi-web-access@0.38.0" ];
-    };
-  };
-
   home.file.".pi/agent/models.json" = {
     force = true;
     text = builtins.toJSON {

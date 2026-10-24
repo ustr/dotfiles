@@ -10,6 +10,7 @@
       "ungoogled-chromium"
       "chatgpt"
       "gimp"
+      "docker-desktop"
     ];
   };
 }
