@@ -1,9 +1,0 @@
-[init]
-	defaultBranch = main
-
-[push]
-	autoSetupRemote = true
-
-[user]
-	email = 139663719+ustr@users.noreply.github.com
-	name = ustr

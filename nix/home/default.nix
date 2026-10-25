@@ -3,6 +3,8 @@
 {
   imports = [
     ./zsh.nix
+    ./git.nix
+    ./gh.nix
   ];
 
   home.file.".pi/agent/models.json" = {
@@ -14,6 +16,17 @@
         apiKey = "ollama";
         models = [{ id = "qwen3.5:9b"; }];
       };
+    };
+  };
+
+  # Keep pi-subagents' `subagent` tool active from the first request instead of
+  # gating it behind `subagents_enable`. Documented equivalent of launching with
+  # `--exclude-tools subagents_enable` (pi-subagents docs/configuration.md).
+  # pi-subagents reads this at session start from <agent-dir>/extensions/subagent.
+  home.file.".pi/agent/extensions/subagent/config.json" = {
+    force = true;
+    text = builtins.toJSON {
+      toolActivation = "eager";
     };
   };
 
@@ -47,6 +60,13 @@
         "$ollama" pull qwen3.5:9b
       fi
     ''}
+  '';
+
+  # Remove the stray ~/.gitconfig so it can't override the home-manager-managed
+  # XDG config (~/.config/git/config). Git reads ~/.gitconfig last, so a leftover
+  # file there would otherwise win.
+  home.activation.removeStrayGitConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    run rm -f "$HOME/.gitconfig"
   '';
 
   home.stateVersion = "26.05";

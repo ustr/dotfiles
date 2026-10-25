@@ -2,8 +2,6 @@
 
 {
   environment.systemPackages = with pkgs; [
-    gh
-    git
     tmux
 
     ghostty-bin
