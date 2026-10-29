@@ -11,7 +11,8 @@
       "chatgpt"
       "gimp"
       "docker-desktop"
-      "kitlangton-hex"  # open-source local Whisper push-to-talk dictation
+      "obs"
+      "kitlangton-hex"
     ];
   };
 }
