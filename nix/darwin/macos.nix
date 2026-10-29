@@ -14,7 +14,7 @@
     CustomUserPreferences.NSGlobalDomain.AppleMenuBarVisibleInFullscreen = 0;
     CustomUserPreferences.NSGlobalDomain.CGDisableCursorLocationMagnification = true;
     CustomUserPreferences.NSGlobalDomain."com.apple.mouse.linear" = true;
-    CustomUserPreferences.NSGlobalDomain."com.apple.mouse.scaling" = 0.6875;
+    CustomUserPreferences.NSGlobalDomain."com.apple.mouse.scaling" = 0.5;
     CustomUserPreferences."com.apple.dock".enterMissionControlByTopWindowDrag = false;
 
     WindowManager.EnableStandardClickToShowDesktop = false;
