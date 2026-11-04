@@ -4,10 +4,7 @@ let
   chromiumApp = "/Applications/Chromium.app";
   port = 9222;
 
-  icon = prev.fetchurl {
-    url = "https://raw.githubusercontent.com/chromium/chromium/150.0.7871.46/chrome/app/theme/chromium/mac/app.icns";
-    hash = "sha256-ocKxcZEjTuSrElnU+1BW7zQMxkNFwafStQTGMoEv8GI=";
-  };
+  icon = ./chromium.icns;
 
   launcher = prev.writeText "chromium-cdp-launcher" ''
     #!/bin/sh
