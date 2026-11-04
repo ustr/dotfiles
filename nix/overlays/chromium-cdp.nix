@@ -6,8 +6,6 @@ let
 
   icon = ./chromium.icns;
 
-  # Execute Chromium in the launched process instead of opening a second app.
-  # A native launcher also lets Launch Services detect the architecture correctly.
   launcher = prev.writeText "chromium-cdp-launcher.c" ''
     #include <stdio.h>
     #include <stdlib.h>
@@ -44,7 +42,6 @@ let
       <key>CFBundleIconFile</key>
       <string>app</string>
       <key>CFBundleIdentifier</key>
-      <!-- Match the installed browser so the Dock groups it with this launcher. -->
       <string>io.ungoogled-software.ungoogled-chromium</string>
       <key>CFBundleInfoDictionaryVersion</key>
       <string>6.0</string>
