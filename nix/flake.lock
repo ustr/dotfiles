@@ -83,11 +83,11 @@
         "nixpkgs-linux": "nixpkgs-linux"
       },
       "locked": {
-        "lastModified": 1793771174,
-        "narHash": "sha256-jPvAl6daVyJlGx7tpNVOsttP0J+QMTpKyyZ+FqPbgg8=",
+        "lastModified": 1793777386,
+        "narHash": "sha256-VdfVCW2Pt2vcMQ9dRuXedXDRhsMyRIQMG+mNbqYEeNc=",
         "ref": "refs/heads/main",
-        "rev": "53fe72de1ca1c63094ddfe1a9fae3281ef243889",
-        "revCount": 5,
+        "rev": "9c8bdc1e50cd62917721ab32e9d80b26198f31f6",
+        "revCount": 6,
         "type": "git",
         "url": "https://github.com/ustr/nixos-macos-vm"
       },
