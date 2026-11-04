@@ -6,12 +6,28 @@ let
 
   icon = ./chromium.icns;
 
-  launcher = prev.writeText "chromium-cdp-launcher" ''
-    #!/bin/sh
-    if /usr/bin/pgrep -xq Chromium && ! /usr/bin/nc -z 127.0.0.1 ${toString port} >/dev/null 2>&1; then
-      /usr/bin/osascript -e 'display notification "Chromium is running without a debugging port. Quit it and relaunch from this icon." with title "${name}"' >/dev/null 2>&1
-    fi
-    exec /usr/bin/open -a "${chromiumApp}" --args --remote-debugging-port=${toString port}
+  # Execute Chromium in the launched process instead of opening a second app.
+  # A native launcher also lets Launch Services detect the architecture correctly.
+  launcher = prev.writeText "chromium-cdp-launcher.c" ''
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <unistd.h>
+
+    int main(int argc, char **argv) {
+      char **args = calloc((size_t)argc + 2, sizeof(*args));
+      if (args == NULL) {
+        perror("calloc");
+        return EXIT_FAILURE;
+      }
+      args[0] = "${chromiumApp}/Contents/MacOS/Chromium";
+      args[1] = "--remote-debugging-port=${toString port}";
+      for (int i = 1; i < argc; ++i) {
+        args[i + 1] = argv[i];
+      }
+      execv(args[0], args);
+      perror("Could not launch Chromium");
+      return EXIT_FAILURE;
+    }
   '';
 
   infoPlist = prev.writeText "chromium-cdp-Info.plist" ''
@@ -28,7 +44,8 @@ let
       <key>CFBundleIconFile</key>
       <string>app</string>
       <key>CFBundleIdentifier</key>
-      <string>local.chromium-cdp</string>
+      <!-- Match the installed browser so the Dock groups it with this launcher. -->
+      <string>io.ungoogled-software.ungoogled-chromium</string>
       <key>CFBundleInfoDictionaryVersion</key>
       <string>6.0</string>
       <key>CFBundleName</key>
@@ -45,17 +62,18 @@ let
       </array>
       <key>LSMinimumSystemVersion</key>
       <string>11.0</string>
-      <key>LSUIElement</key>
-      <true/>
     </dict>
     </plist>
   '';
 in
 {
-  chromium-cdp = prev.runCommand "chromium-cdp" { passthru = { inherit port; }; } ''
+  chromium-cdp = prev.runCommand "chromium-cdp" {
+    nativeBuildInputs = [ prev.stdenv.cc ];
+    passthru = { inherit port; };
+  } ''
     app="$out/Applications/${name}.app"
     mkdir -p "$app/Contents/MacOS" "$app/Contents/Resources"
-    install -m755 ${launcher} "$app/Contents/MacOS/chromium-cdp"
+    $CC -O2 -Wall -Wextra ${launcher} -o "$app/Contents/MacOS/chromium-cdp"
     install -m644 ${infoPlist} "$app/Contents/Info.plist"
     install -m644 ${icon} "$app/Contents/Resources/app.icns"
   '';
