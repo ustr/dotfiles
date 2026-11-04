@@ -1,6 +1,8 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
+  nixpkgs.config.allowUnfreePredicate = pkg: lib.getName pkg == "claude-code";
+
   environment.systemPackages = with pkgs; [
     tmux
 
@@ -13,6 +15,7 @@
 
     uv
     pi-coding-agent
+    claude-code
     estelle
     neovim
     ffmpeg
