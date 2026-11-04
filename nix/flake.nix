@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-macos-vm.url = "git+https://github.com/ustr/nixos-macos-vm";
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-26.05";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -11,11 +12,17 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixos-macos-vm, nix-darwin, nix-homebrew, home-manager, ... }: {
+  outputs = { self, nixpkgs-unstable, nixos-macos-vm, nix-darwin, nix-homebrew, home-manager, ... }:
+  let
+    pkgs-unstable = import nixpkgs-unstable {
+      system = "aarch64-darwin";
+      config.allowUnfreePredicate = pkg: nixpkgs-unstable.lib.getName pkg == "claude-code";
+    };
+  in {
     nixosConfigurations.laptop-vm = nixos-macos-vm.nixosConfigurations.default;
 
     darwinConfigurations.macos = nix-darwin.lib.darwinSystem {
-      specialArgs = { inherit self; };
+      specialArgs = { inherit self pkgs-unstable; };
 
       modules = [
         ./darwin

@@ -83,11 +83,11 @@
         "nixpkgs-linux": "nixpkgs-linux"
       },
       "locked": {
-        "lastModified": 1793766413,
-        "narHash": "sha256-9OBc7ibLeTaxaz00ePjIO8fWUj8q2gYj/zSAZvqwNHc=",
+        "lastModified": 1793771174,
+        "narHash": "sha256-jPvAl6daVyJlGx7tpNVOsttP0J+QMTpKyyZ+FqPbgg8=",
         "ref": "refs/heads/main",
-        "rev": "6d0456e218c644e72364e2db60c931d601eef300",
-        "revCount": 4,
+        "rev": "53fe72de1ca1c63094ddfe1a9fae3281ef243889",
+        "revCount": 5,
         "type": "git",
         "url": "https://github.com/ustr/nixos-macos-vm"
       },
@@ -128,6 +128,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1793540411,
+        "narHash": "sha256-fiPJ88izTVucjeo2EQ3jk4aWmLg03I1D4vxnX2QjEgE=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "0bb2eedc20e4739f29e8045034f2828ad7054f8f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1793671242,
@@ -150,7 +166,8 @@
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
         "nixos-macos-vm": "nixos-macos-vm",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "nixpkgs-unstable": "nixpkgs-unstable"
       }
     }
   },

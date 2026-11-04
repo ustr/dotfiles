@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, pkgs-unstable, ... }:
 
 {
   nixpkgs.config.allowUnfreePredicate = pkg: lib.getName pkg == "claude-code";
@@ -15,7 +15,7 @@
 
     uv
     pi-coding-agent
-    claude-code
+    pkgs-unstable.claude-code
     estelle
     neovim
     ffmpeg

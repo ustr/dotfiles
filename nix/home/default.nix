@@ -80,5 +80,45 @@
     run rm -f "$HOME/.gitconfig"
   '';
 
+  home.activation.configureClaudeCode = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    run ${pkgs.writeShellScript "configure-claude-code" ''
+      set -euo pipefail
+      jq=${lib.getExe pkgs.jq}
+      merge() {
+        local file="$1" filter="$2"
+        mkdir -p "$(dirname "$file")"
+        [[ -f "$file" ]] || echo '{}' > "$file"
+        tmp=$(mktemp)
+        "$jq" "$filter" "$file" > "$tmp"
+        mv "$tmp" "$file"
+      }
+
+      merge "$HOME/.claude/settings.json" '
+        .spinnerTipsEnabled = false
+        | .autoMemoryEnabled = false
+        | .env.CLAUDE_CODE_DISABLE_AUTO_MEMORY = "1"
+        | .env.ENABLE_CLAUDEAI_MCP_SERVERS = "false"
+      '
+
+      merge "$HOME/.claude.json" '
+        .diffTool = "terminal"
+        | .autoConnectIde = false
+        | .autoInstallIdeExtension = false
+        | .mcpServers.playwright = {
+          type: "stdio",
+          command: "npx",
+          args: [
+            "-y",
+            "@playwright/mcp@latest",
+            "--no-webmcp",
+            "--cdp-endpoint",
+            "http://127.0.0.1:${toString pkgs.chromium-cdp.port}"
+          ],
+          env: {}
+        }
+      '
+    ''}
+  '';
+
   home.stateVersion = "26.05";
 }

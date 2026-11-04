@@ -3,11 +3,28 @@ set -euo pipefail
 
 repo=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
 flake="$repo/nix"
-roots="${XDG_STATE_HOME:-$HOME/.local/state}/nix/roots"
-mkdir -p "$roots"
 git -C "$repo" symbolic-ref --quiet --short HEAD >/dev/null
 
-nix flake update --flake "path:$flake"
+update=false
+git_status=$(git -C "$repo" status --porcelain --untracked-files=all)
+if [[ -z $git_status ]]; then
+  update=true
+  if [[ ${RB_PULLED_REPO:-} != "$repo" ]]; then
+    git -C "$repo" pull --ff-only
+    # Reload the script in case the pull updated it.
+    RB_PULLED_REPO="$repo" exec bash "$repo/nix/rebuild.sh" "$@"
+  fi
+else
+  echo "Working tree is dirty; skipping pull, flake/profile updates, commit, and push."
+fi
+unset RB_PULLED_REPO
+
+roots="${XDG_STATE_HOME:-$HOME/.local/state}/nix/roots"
+mkdir -p "$roots"
+
+if [[ $update == true ]]; then
+  nix flake update --flake "path:$flake"
+fi
 vm_package=$(nix eval --raw "path:$flake#darwinConfigurations.macos.config.programs.nixos-macos-vm" \
   --apply 'cfg: if cfg.enable then cfg.package.outPath else ""')
 if [[ -n $vm_package ]] && ! nix path-info "$vm_package" >/dev/null 2>&1; then
@@ -74,9 +91,11 @@ if [[ $needs_activation == true ]]; then
 else
   echo "Nix system and Homebrew are current; skipping rebuild and activation."
 fi
-nix profile upgrade --all
+if [[ $update == true ]]; then
+  nix profile upgrade --all
 
-if ! git -C "$repo" diff --quiet HEAD -- nix/flake.lock; then
-  git -C "$repo" commit --only --allow-empty-message -m "" -- nix/flake.lock
+  if ! git -C "$repo" diff --quiet HEAD -- nix/flake.lock; then
+    git -C "$repo" commit --only --allow-empty-message -m "" -- nix/flake.lock
+  fi
+  git -C "$repo" push
 fi
-git -C "$repo" push
