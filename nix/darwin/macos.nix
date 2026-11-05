@@ -7,7 +7,7 @@
     NSGlobalDomain.InitialKeyRepeat = 15;
     NSGlobalDomain.KeyRepeat = 2;
     NSGlobalDomain.NSAutomaticPeriodSubstitutionEnabled = false;
-    NSGlobalDomain._HIHideMenuBar = true;
+    NSGlobalDomain._HIHideMenuBar = false;
     NSGlobalDomain."com.apple.sound.beep.volume" = 0.0;
     NSGlobalDomain."com.apple.swipescrolldirection" = false;
 

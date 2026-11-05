@@ -23,11 +23,8 @@
     force = true;
     text = builtins.toJSON {
       mcpServers.playwright = {
-        command = "npx";
+        command = "${pkgs.playwright-mcp}/bin/playwright-mcp";
         args = [
-          "-y"
-          "@playwright/mcp@latest"
-          "--no-webmcp"
           "--cdp-endpoint"
           "http://127.0.0.1:${toString pkgs.chromium-cdp.port}"
         ];
@@ -106,11 +103,8 @@
         | .autoInstallIdeExtension = false
         | .mcpServers.playwright = {
           type: "stdio",
-          command: "npx",
+          command: "${pkgs.playwright-mcp}/bin/playwright-mcp",
           args: [
-            "-y",
-            "@playwright/mcp@latest",
-            "--no-webmcp",
             "--cdp-endpoint",
             "http://127.0.0.1:${toString pkgs.chromium-cdp.port}"
           ],

@@ -59,6 +59,10 @@ let
       </array>
       <key>LSMinimumSystemVersion</key>
       <string>11.0</string>
+      <key>NSMicrophoneUsageDescription</key>
+      <string>Microphone access for calls</string>
+      <key>NSCameraUsageDescription</key>
+      <string>Camera access for calls</string>
     </dict>
     </plist>
   '';
