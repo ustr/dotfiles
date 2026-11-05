@@ -95,12 +95,16 @@
         | .autoMemoryEnabled = false
         | .env.CLAUDE_CODE_DISABLE_AUTO_MEMORY = "1"
         | .env.ENABLE_CLAUDEAI_MCP_SERVERS = "false"
+        | .permissions.additionalDirectories = ((.permissions.additionalDirectories // []) + [ "/" ] | unique)
+        | .permissions.allow = ((.permissions.allow // []) + [ "Read(//**)", "Edit(//**)" ] | unique)
+        | .permissions.defaultMode = "bypassPermissions"
       '
 
       merge "$HOME/.claude.json" '
         .diffTool = "terminal"
         | .autoConnectIde = false
         | .autoInstallIdeExtension = false
+        | .projects["/"].hasTrustDialogAccepted = true
         | .mcpServers.playwright = {
           type: "stdio",
           command: "${pkgs.playwright-mcp}/bin/playwright-mcp",
