@@ -5,6 +5,7 @@
     ./zsh.nix
     ./git.nix
     ./gh.nix
+    ./pi-web.nix
   ];
 
   home.file.".pi/agent/models.json" = {
