@@ -1,9 +1,26 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.zsh = {
     enable = true;
     enableCompletion = false;
+
+    initContent = ''
+      qr() {
+        local url
+        if (( $# > 1 )); then
+          print -u2 'Usage: qr [URL]'
+          return 1
+        fi
+        if (( $# == 1 )); then
+          url="$1"
+        else
+          read -r 'url?URL: ' || return
+        fi
+        [[ -n "$url" ]] || return 1
+        ${pkgs.qrencode}/bin/qrencode -t ANSIUTF8 -- "$url"
+      }
+    '';
 
     shellAliases = {
       vim = "nvim";
