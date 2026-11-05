@@ -12,6 +12,7 @@
     signal-desktop
     ollama
     mpv
+    openai-whisper
 
     uv
     pi-coding-agent
