@@ -39,6 +39,7 @@
 
         home-manager.darwinModules.home-manager
         {
+          home-manager.extraSpecialArgs = { inherit pkgs-unstable; };
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.user = import ./home;
