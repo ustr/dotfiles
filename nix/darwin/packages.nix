@@ -8,7 +8,6 @@
 
     ghostty-bin
     chromium-cdp
-    keepassxc
     signal-desktop
     ollama
     mpv

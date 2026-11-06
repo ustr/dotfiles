@@ -33,7 +33,7 @@
     dock.persistent-apps = [
       "${pkgs.ghostty-bin}/Applications/Ghostty.app"
       "${pkgs.chromium-cdp}/Applications/Chromium CDP.app"
-      "${pkgs.keepassxc}/Applications/KeepassXC.app"
+      "/Applications/KeePassXC.app"
     ];
     dock.persistent-others = [ ];
     dock.show-recents = false;

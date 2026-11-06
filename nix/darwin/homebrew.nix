@@ -21,6 +21,7 @@ in
     greedyCasks = true;
 
     casks = [
+      "keepassxc"
       "ungoogled-chromium"
       "gimp"
       "obs"
