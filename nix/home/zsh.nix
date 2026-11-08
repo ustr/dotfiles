@@ -20,6 +20,21 @@
         [[ -n "$url" ]] || return 1
         ${pkgs.qrencode}/bin/qrencode -t ANSIUTF8 -- "$url"
       }
+
+      qrdecode() {
+        local image
+        if (( $# > 1 )); then
+          print -u2 'Usage: qrdecode [IMAGE]'
+          return 1
+        fi
+        if (( $# == 1 )); then
+          image="$1"
+        else
+          image=$(mktemp -t qrdecode).png
+          /usr/sbin/screencapture -i "$image" || return 1
+        fi
+        ${pkgs.zbar}/bin/zbarimg --quiet --raw "$image"
+      }
     '';
 
     shellAliases = {
