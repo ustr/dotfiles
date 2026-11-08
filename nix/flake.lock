@@ -83,11 +83,11 @@
         "nixpkgs-linux": "nixpkgs-linux"
       },
       "locked": {
-        "lastModified": 1793777386,
-        "narHash": "sha256-VdfVCW2Pt2vcMQ9dRuXedXDRhsMyRIQMG+mNbqYEeNc=",
+        "lastModified": 1794034957,
+        "narHash": "sha256-6BCVEBHSjpI4bfiprJ6F5Uavr5vdAmbowyLd07yeDIA=",
         "ref": "refs/heads/main",
-        "rev": "9c8bdc1e50cd62917721ab32e9d80b26198f31f6",
-        "revCount": 6,
+        "rev": "01a2434b263c5dd9de67d7cb4e0d0484ec064b2f",
+        "revCount": 9,
         "type": "git",
         "url": "https://github.com/ustr/nixos-macos-vm"
       },
@@ -130,11 +130,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1793726008,
-        "narHash": "sha256-jQp1wKvbwWdLBASTXkSi/VYmDJ5AbBi1WvcMt9HWJC8=",
+        "lastModified": 1793876309,
+        "narHash": "sha256-Wojg9lIH/hDH91iDVH2/EPw8oDSpxjxhXONbU1yf4Zg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "1d060086d60cb76a40cf37109f979d88a5bd6396",
+        "rev": "f9a75f41be3a74eab55d3a7679d34ad6cc0da977",
         "type": "github"
       },
       "original": {
