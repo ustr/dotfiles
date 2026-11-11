@@ -86,6 +86,13 @@ else
   needs_activation=true
 fi
 
+# Register the build as the system generation. Boot activation reads
+# /nix/var/nix/profiles/system, so without this a reboot reverts to an old system.
+system_target=$(readlink -f "$system")
+if [[ $(readlink -f /nix/var/nix/profiles/system) != "$system_target" ]]; then
+  sudo nix-env -p /nix/var/nix/profiles/system --set "$system_target"
+fi
+
 if [[ $needs_activation == true ]]; then
   sudo "$system/sw/bin/darwin-rebuild" activate
 else
